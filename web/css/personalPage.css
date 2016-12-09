@@ -1,0 +1,135 @@
+.PersonalInfo{
+    margin-top: 50px;
+    text-align: right !important;
+    width: 280px;
+    height: 580px;
+}
+.PersonalInfo div{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.PersonalInfo input[type="text"]{
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.PersonalInfo input[type="password"] {
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+}
+.radio{
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+    display: inline-block;
+}
+#updatePersonalInfo{
+    width: 140px;
+    line-height: 38px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    float:right;
+    text-shadow: 1px 1px 1px #333;
+    border-radius: 5px;
+    margin: 0 50px 20px 0;
+    border: 1px solid #f9edef;
+    box-shadow: 0 1px 2px #f6c8d3 inset,0 -1px 0 #e9d2d8 inset,0 -2px 3px #fcecef inset;
+    background: -webkit-linear-gradient(top,#f7afc8,#f3b1cd);    
+}
+
+
+.menuPersonal{
+    width:220px;
+    font-family:Nanum Brush Script;
+    font-weight: bold;
+}
+.menuPersonal ul {
+    width:220px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menuPersonal ul li {
+    text-decoration: none;
+    color: hotpink;
+    font-size:35px;
+    padding: 11.5px 11px;
+    background-color:#fbecfb;
+    display:block;
+    cursor: pointer;
+}
+
+
+.menuPersonal ul li:hover {
+    padding-left:10px;
+    color: hotpink;
+    background-color:#fdf6fd;
+    cursor: pointer;
+}
+
+/********** History Table ***********/
+fieldset{
+    margin-top: 20px;
+    width: 700px;
+    height: 850px;
+    border: 2px groove #f6c8d3;
+}
+legend{
+/*    font-family:Zapfino;*/
+    font-size: 40px;
+    color: #f3b1cd;
+    font-weight: bold;
+}
+.quantity{
+    float:left;
+    margin-left: 20px;
+    font-family: Gabriola;
+    font-size: 30px;
+    font-weight: bold;
+    color:hotpink;
+}
+
+#showQuantity{
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.itemShowTable{
+    margin-top: 80px;
+    margin-bottom: 30px;
+    width: 650px;
+    font-family: Gabriola;
+
+    
+}
+.itemShowTable td{
+    width: 150px;
+    height: 55px;
+    text-align: center;
+    font-size: 20px;
+
+}
+.itemShowTable th{
+    width: 80px;
+    height: 50px;
+    font-size: 20px;
+    color: hotpink;
+    text-align: center;
+    font-weight:bold;
+}
+
+.itemShowTable input{
+    width: 80px;
+    height: 20px;
+}
+.itemShowTable button{
+    margin-left: 10px;
+    width: 40px;
+    height: 20px;
+}

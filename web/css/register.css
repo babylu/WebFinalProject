@@ -1,0 +1,50 @@
+.registerTable{
+    margin-left: 50px;
+    margin-top: 50px;
+    text-align: right !important;
+    width: 550px;
+    height: 580px;
+}
+.registerTable div{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.registerTable input[type="text"]{
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+}
+.registerTable input[type="email"]{
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.registerTable input[type="password"] {
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+}
+.radio{
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+    display: inline-block;
+}
+#registerSubmit{
+    width: 140px;
+    line-height: 38px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    float:right;
+    text-shadow: 1px 1px 1px #333;
+    border-radius: 5px;
+    margin: 0 50px 20px 0;
+    border: 1px solid #f9edef;
+    box-shadow: 0 1px 2px #f6c8d3 inset,0 -1px 0 #e9d2d8 inset,0 -2px 3px #fcecef inset;
+    background: -webkit-linear-gradient(top,#f7afc8,#f3b1cd);    
+}
+
+
+
