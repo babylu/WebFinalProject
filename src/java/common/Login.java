@@ -1,14 +1,11 @@
 package common;
 
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import java.sql.*;
@@ -35,20 +32,36 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        try {
-            String email = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            Class.forName("com.mysql.jdbc.Driver");
-            String connURL = "jdbc:mysql://localhost:8889/web_final";
-            conn = DriverManager.getConnection(connURL, "root", "root");
+        // connect database
+        DBConnecter dbConnecter = new DBConnecter();
+        conn = dbConnecter.connetDatabase();
+        //connect error
+        if(conn == null){
+            output = "Connect Database Error";
+            failLogin(request, response);
+        }
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String type = request.getParameter("type");
+        
+        try{
+            //user login
             st = conn.createStatement();
-            String sql = "SELECT * FROM user WHERE email='" + email +"'";
-            rs = st.executeQuery(sql);
+            String sql;
+            if(type.equals("customer")){
+                //customer login
+                sql = "SELECT * FROM customer WHERE customer_id = '" + username +"'";
+            }else{
+                //admin login
+                sql = "SELECT * FROM admin WHERE username = '" + username +"'";
+            }
             
+            rs = st.executeQuery(sql);
+
             if (rs.next()) {
                 if (password.equals(rs.getString("password").trim())) {
-                    successLogin(request, response, rs.getString("email").trim());
+                    successLogin(request, response, rs.getString("email").trim(),type);
                 }
                 else {
                     output = "Wrong password!";
@@ -60,9 +73,6 @@ public class Login extends HttpServlet {
             }
             rs.close();
             st.close();
-        }
-        catch (ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
         }
         catch (SQLException se)
         {
@@ -95,11 +105,16 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void successLogin (HttpServletRequest request, HttpServletResponse response, String name)
+    protected void successLogin (HttpServletRequest request, HttpServletResponse response, String name, String type)
             throws ServletException, IOException  {
         HttpSession session = request.getSession();
         session.setAttribute("username", name);
-        response.sendRedirect("icecream.jsp");
+        if(type.equals("customer")){
+            response.sendRedirect("index.jsp");
+        }else{
+            response.sendRedirect("index.jsp");
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
