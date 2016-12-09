@@ -8,14 +8,6 @@
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>buyProduct</servlet-name>
-        <servlet-class>hw6.BuyProduct</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>buyProduct</servlet-name>
-        <url-pattern>/buyProduct</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
