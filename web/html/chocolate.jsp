@@ -53,25 +53,10 @@
                                 <th>Buy Number</th>
                             </tr>
                             <tbody>
-<!--                                <?php
-                                    $con = mysql_connect("localhost","root","root");
-                                    if (!$con){
-                                        die('Could not connect: ' . mysql_error());
-                                    }
-                                    mysql_select_db("e-commerce", $con);
-                                    $result = mysql_query("select product_id, name,  amount, price from product where kind='chocolate'");
-                                    while($row = mysql_fetch_array($result)){
-                                        echo"<tr><td>" . htmlentities($row["name"]) . "</td>";
-                                        echo"<td>" . htmlentities($row["amount"]) . "</td>";
-                                        echo"<td>" . htmlentities($row["price"]) . "</td>";
-                                        echo"<td>"
-                                            . "<form action='../php/buyProduct.php' method='post'>"
-                                                    . "<input type='text' name='number'><input type='hidden' name='product_id' value='".htmlentities($row["product_id"])."'><button type='submit'>Buy</button>"
-                                            . "</form></td>";
-                                        echo "</tr>";
-                                    }
-                                    mysql_close($con);
-                                ?>                        -->
+                                <jsp:useBean id="searchItem" class="customer.SearchItem" scope="page" />
+                                <%
+                                    out.print(searchItem.searchItemByType("chocolate"));   
+                                %>
                             </tbody>
                         </table>
                     </fieldset>

@@ -46,11 +46,11 @@
                 </ul>
             </div>
             <div class="body">
-                <div class="theme-default">
-                    <div id="slider" class="nivoSlider">
+                <div class="theme-default"> 
+                    <div id="slider" class="nivoSlider" style="width:950px;margin:5px 5px 5px 5px;">
                         <img src="img/cake.jpeg" alt="Img"/>
                         <img src="img/cake1.jpg" alt="Img"/>
-                        <img src="img/cake3.jpg" alt="Img"/>                                
+                        <img src="img/cake2.jpg" alt="Img"/>                                
                     </div>
                 </div>
 

@@ -13,24 +13,4 @@ $(function(){
         $('#personalInfoPage').hide();
         $('#purchaseHistoryPage').show();
     });
-    
-    $('#business').hide();
-    $('#home').hide();
-    
-    if(document.getElementById("homeRadio").checked === true){
-        $('#home').show();
-        $('#business').hide();
-    }else if(document.getElementById('businessRadio').checked === true){
-        $('#business').show();
-        $('#home').hide();
-    }
-    
-    $('#homeRadio').click(function(){
-        $('#home').show();
-        $('#business').hide();
-    });
-    $('#businessRadio').click(function(){
-        $('#business').show();
-        $('#home').hide();
-    });
 });

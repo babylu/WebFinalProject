@@ -10,9 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Personal Page</title>
-<script type="text/javascript" src="../jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="../js/personalPage.js"></script>
-<script type="text/javascript" src="../main.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
 <link rel="stylesheet" href="../css/common.css" type="text/css">
 <link rel="stylesheet" href="../css/pageIndex.css" type="text/css">
 <link rel="stylesheet" href="../css/personalPage.css" type="text/css">
@@ -25,12 +25,12 @@
             <div class="option">
                 <div id="link">
                     <div id="username" class="username"><% 
-                                if(session.getAttribute("username") == null){
-                                    out.print("Login/Register");
-                                }else{
-                                    out.print(session.getAttribute("username"));
-                                }
-                        %></div>
+                        if(session.getAttribute("username") == null){
+                            out.print("Login/Register");
+                        }else{
+                            out.print(session.getAttribute("username"));
+                        }
+                    %></div>
                 </div>
                 <input id="searchInput" type="text" placeholder=" search" style='font-size:13px;'>
                 <img id="searchIcon" alt="searchIcon" src="../img/searchIcon20.jpeg"  onclick="window.location.href='searchResult.php'">
@@ -57,7 +57,7 @@
                 <center>
                 <fieldset>
                     <legend>Basic Info</legend>
-                    <form id="personalInfo" class="PersonalInfo" action="../php/modifyUser.php" method="post">
+                    <form id="personalInfo" class="PersonalInfo" action="" method="post">
                         <div>
                             <label>Name: </label>
                             <input type="text" name="name" value="" required>
@@ -83,33 +83,21 @@
                             <div class="radio" style="margin-top: 0;margin-bottom: 0;">
                             </div>
                         </div>
-                        <div id="business">
-                            <div>
-                                <label>Category: </label>
-                                <input type="text" name="category" value="">
-                            </div>
-                            <div>
-                                <label>Annual Income: </label>
-                                <input type="text" name="annualIncome" value="">
-                            </div>
+                        <div>
+                            <label>Marriage Statue: </label>
+                            <div class="radio" style="margin-top: 0;margin-bottom: 0;"></div>
                         </div>
-                        <div id="home">
-                            <div>
-                                <label>Marriage Statue: </label>
-                                <div class="radio" style="margin-top: 0;margin-bottom: 0;"></div>
-                            </div>
-                            <div>
-                                <label>Gender: </label>
-                                <div class="radio" style="margin-top: 0;margin-bottom: 0;"></div>
-                            </div>
-                            <div>
-                                <label>Age: </label>
-                                <input type="text" name="age" value="">
-                            </div>
-                            <div>
-                                <label>Income: </label>
-                                <input type="text" name="income" value="">
-                            </div>
+                        <div>
+                            <label>Gender: </label>
+                            <div class="radio" style="margin-top: 0;margin-bottom: 0;"></div>
+                        </div>
+                        <div>
+                            <label>Age: </label>
+                            <input type="text" name="age" value="">
+                        </div>
+                        <div>
+                            <label>Income: </label>
+                            <input type="text" name="income" value="">
                         </div>
                         <button id="updatePersonalInfo">Update</button>
                     </form>

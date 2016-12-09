@@ -22,9 +22,9 @@
                         <h3 align="center" style='margin-bottom: 20px; padding-bottom: 5px;border-bottom: dotted 1px gray;'>Login</h3>
                         <form method="post" action="login" class="form-horizontal"  role="form">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Email</label>
+                                <label class="col-sm-4 control-label">Username</label>
                                 <div class="col-sm-6">
-                                    <input type="text" id="username" name="username" class="form-control" placeholder="Email" required>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group" style='margin-left: 10px;'>
                                 <label class="col-sm-4 col-sm-offset-2 radio-inline" >
-                                    <input type="radio" value="customer" name="type" id="customer"> Customer
+                                    <input type="radio" value="customer" name="type" id="customer" checked="checked"> Customer
                                 </label>
                                 
                                 <label class="col-sm-4 radio-inline">

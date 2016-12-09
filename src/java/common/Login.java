@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
 
             if (rs.next()) {
                 if (password.equals(rs.getString("password").trim())) {
-                    successLogin(request, response, rs.getString("email").trim(),type);
+                    successLogin(request, response, username,type);
                 }
                 else {
                     output = "Wrong password!";
@@ -92,7 +92,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException  {
         try (PrintWriter out = response.getWriter()) {
             out.println("<script>alert('Failed login: " + output + " Please try again!');</script>");
-            out.println("<script>window.location.href = 'http://localhost:8080/WebHw6/index.jsp';</script>");
+            out.println("<script>window.location.href = 'http://localhost:8080/WebFinalProject/html/login.jsp';</script>");
         }
     }
     
@@ -110,9 +110,9 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("username", name);
         if(type.equals("customer")){
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("../index.jsp");
         }else{
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("../index.jsp");
         }
         
     }

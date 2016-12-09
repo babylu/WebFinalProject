@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page language="java" import="java.io.PrintWriter" %>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,45 +51,16 @@
                             <table class="itemShowTable">
                                 <tr>
                                     <th>Item Name</th>
+                                    <th>Stock</th>
                                     <th>Price</th>
                                     <th>Buy Number</th>
                                 </tr>
-                                <tr>
-                                    <td>Vanilla</td>
-                                    <td>4.99</td>
-                                    <td>
-                                        <form action='buyProduct'  method='post'>
-                                            <input type='text' name='product_quantity'>
-                                            <input type='hidden' name='product_id' value='Vanilla'>
-                                            <input type='hidden' name='product_price' value='4.99'>
-                                            <button type='submit'>Buy</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Chocolate</td>
-                                    <td>5.99</td>
-                                    <td>
-                                        <form action='buyProduct'  method='post'>
-                                            <input type='text' name='product_quantity'>
-                                            <input type='hidden' name='product_id' value='Chocolate'>
-                                            <input type='hidden' name='product_price' value='5.99'>
-                                            <button type='submit'>Buy</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Strawberry</td>
-                                    <td>4.89</td>
-                                    <td>
-                                        <form action='buyProduct'  method='post'>
-                                            <input type='text' name='product_quantity'>
-                                            <input type='hidden' name='product_id' value='Strawberry'>
-                                            <input type='hidden' name='product_price' value='4.89'>
-                                            <button type='submit'>Buy</button>
-                                        </form>
-                                    </td>
-                                </tr> 
+                                <tbody>
+                                    <jsp:useBean id="searchItem" class="customer.SearchItem" scope="page" />
+                                    <%
+                                        out.print(searchItem.searchItemByType("icecream"));   
+                                    %>
+                                </tbody>
                             </table>
                         </center>
                     </fieldset>
