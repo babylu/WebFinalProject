@@ -26,7 +26,7 @@
                                 if(session.getAttribute("username") == null){
                                     out.print("Login/Register");
                                 }else{
-                                    out.print(session.getAttribute("username"));
+                                    out.print(session.getAttribute("name"));
                                 }
                         %></div>
                     </div>

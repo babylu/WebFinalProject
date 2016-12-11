@@ -1,4 +1,3 @@
-
 package customer;
 
 import common.DBConnecter;
@@ -8,27 +7,23 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
  * @author babylu
  */
-public class BuyProduct extends HttpServlet {
+public class ModifyUser extends HttpServlet {
     private Statement st;
     private ResultSet rs = null;
     private Connection conn = null;
-    private String output;
-    private String page;
+
     /**
      * Processes requests for both HTTP GET and POST methods.
      *
@@ -43,69 +38,70 @@ public class BuyProduct extends HttpServlet {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         DBConnecter dbConnecter = new DBConnecter();
-        Connection conn = dbConnecter.connetDatabase();
+        conn = dbConnecter.connetDatabase();
         
-        //no session name -> to login
-        if (session.getAttribute("username") == null) {
+
+        if(session.getAttribute("username")==null){
             out.println("<script>alert('Please login first!')</script>");
             out.println("<script>window.location.href = 'http://localhost:8080/WebFinalProject/html/login.jsp';</script>");
             return;
         }
         
-        //check input number
-        Pattern r = Pattern.compile("[0-9]+");
-        Matcher m = r.matcher(request.getParameter("number"));
-        if (!m.matches()) {
-            out.println("<script>alert('Input Error!');</script>");
+        String username = session.getAttribute("username").toString();
+        
+        //check name
+        String name = request.getParameter("name");
+        if(name.equals("")){
+            out.println("<script>alert('Please Input Name!');</script>");
             out.println("<script>window.history.go(-1);</script>");
             return;
         }
         
-        
-        //generate all parameters
-        String username = (String)session.getAttribute("username");
-        // get parameters submitted from the form
-        String productId = request.getParameter("product_id");
-        int productQuantity = Integer.parseInt(request.getParameter("number"));
-        double productPrice = Double.parseDouble(request.getParameter("product_price"))*((double)productQuantity);
-        SimpleDateFormat df = new SimpleDateFormat("mmddyyyyhhmmss");
-        // Get the date today using Calendar object.
-        Date today = Calendar.getInstance().getTime();        
-        // Using DateFormat format method we can create a string 
-        // representation of a date with the defined format.
-        String orderNum = df.format(today);
-        
-        Integer amount = 0;
-        //check product situation
-        try{
-            st = conn.createStatement();
-            String selectSQL = "SELECT amount FROM product WHERE product_id = " + productId + "";
-            rs = st.executeQuery(selectSQL);
-            if(rs.next()){
-                amount = Integer.parseInt(rs.getString("amount"));
-                if(productQuantity > amount){
-                    out.println("<script>alert('No Enough Product!');</script>");
-                    out.println("<script>window.history.go(-1);</script>");
-                    return;
-                }
-            }else{
-                out.println("<script>alert('Error!');</script>");
-                out.println("<script>window.history.go(-1);</script>");
-                return;
-            }
-        }catch (SQLException se)
-        {
-            se.printStackTrace();  
+        //check zipcode
+        String zipcode = request.getParameter("address_zipcode");
+        Pattern r = Pattern.compile("[0-9]{5}");
+        Matcher m = r.matcher(zipcode);
+        if (!m.matches()) {
+            out.println("<script>alert('Input Zip Code Error!');</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
         }
         
+        //check age
+        String age = request.getParameter("age");
+        r = Pattern.compile("[0-9]{1,2}");
+        m = r.matcher(age);
+        if (!m.matches()) {
+            out.println("<script>alert('Input Age Error!');</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
+        }
+        
+        //check income
+        String income = request.getParameter("income");
+        r = Pattern.compile("[0-9]{1,10}");
+        m = r.matcher(income);
+        if (!m.matches()) {
+            out.println("<script>alert('Input Income Error!');</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
+        }
+        //prepare data
+        String street = request.getParameter("address_street");
+        String city = request.getParameter("address_city");
+        String state = request.getParameter("address_state");
+        int zipcodeInt = Integer.parseInt(zipcode);
+        String marriageStatue = request.getParameter("marriageStatue");
+        String gender = request.getParameter("gender");
+        int ageInt = Integer.parseInt(age);
+        int incomeInt = Integer.parseInt(income);
         try{
-            st = conn.createStatement();
-            String insertSql = "INSERT INTO transaction (order_number, product_id, product_price, product_quantity, customer_id) VALUES ('"+orderNum+"','"+productId+"','"+productPrice+"','"+productQuantity+"','"+username+"')";
-            st.executeUpdate(insertSql);
-            String updateSql = "UPDATE product set amount = " + (amount - productQuantity) + " where product_id=" + productId + ";";
+            st = conn.createStatement();;
+            String updateSql = "UPDATE customer SET address_street='" + street +"',address_city='"+city+"',address_state='"+state+"',address_zipcode="+zipcodeInt+
+                    ",marriage='"+marriageStatue+"',gender='"+gender+"',age="+ageInt+",income="+incomeInt+" WHERE customer_id='"+username+"';";
             st.executeUpdate(updateSql);
-            out.println("<script>alert('Buy success!   Your order number is "+ orderNum +"');</script>");
-            out.println("<script>location.href = document.referrer;</script>");
+            out.println("<script>alert('Modeify Success!');</script>");
+            out.println("<script>window.location.href = 'http://localhost:8080/WebFinalProject/html/personalPage.jsp';</script>\")");
         }catch (SQLException se)
         {
             se.printStackTrace();  
@@ -150,5 +146,4 @@ public class BuyProduct extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-      
 }

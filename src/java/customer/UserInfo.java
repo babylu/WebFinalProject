@@ -5,18 +5,17 @@ package customer;
  * @author babylu
  */
 public class UserInfo {
-    private String username;
-    private String name;
-    private String address_street;
-    private String address_city;
-    private String address_state;
-    private int address_zipcode;
-    private String marriage;
-    private String gender;
-    private int age;
-    private int income;
-    private String password;
-    
+    private String username = "";
+    private String name = "";
+    private String address_street = "";
+    private String address_city = "";
+    private String address_state = "";
+    private int address_zipcode = 0;
+    private String marriage = "";
+    private String gender = "";
+    private int age = 0;
+    private int income = 0;
+    private String password  = "";
     
     public String getUsername() {
             return username;

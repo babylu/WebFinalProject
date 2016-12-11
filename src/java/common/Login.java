@@ -61,7 +61,12 @@ public class Login extends HttpServlet {
 
             if (rs.next()) {
                 if (password.equals(rs.getString("password").trim())) {
-                    successLogin(request, response, username,type);
+                    if(type.equals("customer")){
+                        successLogin(request, response, rs.getString("name"),username,type);
+                    }else{
+                        successLogin(request, response, "", username,type);
+                    }
+                    
                 }
                 else {
                     output = "Wrong password!";
@@ -102,17 +107,20 @@ public class Login extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @param name username
+     * @param type usertype
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void successLogin (HttpServletRequest request, HttpServletResponse response, String name, String type)
+    public void successLogin (HttpServletRequest request, HttpServletResponse response, String name,String username, String type)
             throws ServletException, IOException  {
         HttpSession session = request.getSession();
-        session.setAttribute("username", name);
+        session.setAttribute("username", username);
+        session.setAttribute("name", name);
+        session.setAttribute("type", type);
         if(type.equals("customer")){
             response.sendRedirect("../index.jsp");
         }else{
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("./adminStock.jsp");
         }
         
     }

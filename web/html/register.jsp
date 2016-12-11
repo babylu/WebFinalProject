@@ -10,18 +10,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
-<script type="text/javascript" src="../jquery-2.1.4.js"></script>
 <link rel="stylesheet" href="../css/common.css" type="text/css">
-<link rel="stylesheet" href="../css/pageIndex.css" type="text/css">
 <link rel="stylesheet" href="../css/register.css" type="text/css">
-<script type="text/javascript" src="../js/register.js"></script>
+
 </head>
 <body>
     <div class="mainPart">
         <div class="header">
             <img class="title" style="margin-left: 0" alt="title" src="../img/title.jpg">
         </div>
-        <div style="height: 700px;border-top: dotted 1px gray;">
+        <div class="bodyRegister">
             <form action="register" method="post" id="registerInfo" class="registerTable">
                 <div>
                     <label>Username </label>
@@ -49,7 +47,7 @@
                 </div>
                 <div>
                     <label>Zip Code: </label>
-                    <input type="text" name="address_Zipcode" required>
+                    <input type="text" name="address_zipcode" required>
                 </div>
                 <div>
                     <label>Marriage Statue: </label>
@@ -61,8 +59,8 @@
                 <div>
                     <label>Gender: </label>
                     <div class="radio" style="margin-top: 0;margin-bottom: 0;">
-                        <input type="radio" name="gender" value="Female" checked="checked">Female
-                        <input type="radio" name="gender" value="Male">Male
+                        <input type="radio" name="gender" value="female" checked="checked">Female
+                        <input type="radio" name="gender" value="fale">Male
                     </div>
                 </div>
                 <div>

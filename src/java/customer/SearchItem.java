@@ -11,6 +11,7 @@ public class SearchItem {
     private DBConnecter dbConnecter = new DBConnecter();
     private Connection conn = dbConnecter.connetDatabase();
     private ResultSet rs;
+    
     public String searchItemByType(String type){
         String output = "";
         
@@ -39,6 +40,7 @@ public class SearchItem {
     
     public String searchItemByUserInput(String searchInfo){
         String output = "";
+        if(searchInfo.equals("")) return output;
         String[] searchList = searchInfo.split(" ");
         try{
             ArrayList<String> idList = new ArrayList<>();

@@ -6,6 +6,7 @@
 package customer;
 
 import common.DBConnecter;
+import common.Login;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -61,8 +62,7 @@ public class Register extends HttpServlet {
                 out.println("<script>window.history.go(-1);</script>");
                 return;
             }
-        }
-        catch (SQLException se)
+        }catch (SQLException se)
         {
             se.printStackTrace();  
         }
@@ -83,15 +83,21 @@ public class Register extends HttpServlet {
                 out.println("<script>window.history.go(-1);</script>");
                 return;
             }
-        }
-        catch (SQLException se)
+        }catch (SQLException se)
         {
             se.printStackTrace();  
         }
         
+        //check name
+        String name = request.getParameter("name");
+        if(name.equals("")){
+            out.println("<script>alert('Please Input Name!');</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
+        }
+        
         //check zipcode
-        String zipcode = request.getParameter("address_Zipcode");
-        //check input number
+        String zipcode = request.getParameter("address_zipcode");
         Pattern r = Pattern.compile("[0-9]{5}");
         Matcher m = r.matcher(zipcode);
         if (!m.matches()) {
@@ -120,10 +126,27 @@ public class Register extends HttpServlet {
             return;
         }
         
+        //prepare data
+        String street = request.getParameter("address_street");
+        String city = request.getParameter("address_city");
+        String state = request.getParameter("address_state");
+        int zipcodeInt = Integer.parseInt(zipcode);
+        String marriageStatue = request.getParameter("marriageStatue");
+        String gender = request.getParameter("gender");
+        int ageInt = Integer.parseInt(age);
+        int incomeInt = Integer.parseInt(income);
         
-        
-        
-        
+        try{
+            String insertSql = "INSERT INTO customer (customer_id,password, name, address_street, address_city, address_state, address_zipcode, marriage,gender,age,income) VALUES "
+                + "('"+username+"','"+password+"','"+name+"','"+street+"','"+city+"','"+state+"','"+zipcodeInt+"','"+marriageStatue+"','"+gender+"','"+ageInt+"','"+incomeInt+"')";
+            st.executeUpdate(insertSql);
+            out.println("<script>alert('Register Success!');</script>");
+            Login login = new Login();
+            login.successLogin(request, response, name,username, "customer");
+        }catch (SQLException se)
+        {
+            se.printStackTrace();  
+        }
     }
     
     

@@ -17,9 +17,6 @@
     background-color: #fdf6fd;
     overflow: hidden;
 }
-#searchIcon{
-    top: 11.4%;
-}
 /**********left menu*********/
 .menuPersonal{
     width:100%;
@@ -67,7 +64,7 @@ legend{
 .PersonalInfo{
     margin-top: 8%;
     text-align: right !important;
-    width: 40%;
+    width: 55%;
     height: 65%;
 }
 
@@ -84,12 +81,14 @@ legend{
 
 .radio{
     width: 45%;
-    height: 40%;
     margin-left: 7%;
     display: inline-block;
     overflow: hidden;
+    font-size: 1vw;
 }
-
+.radio input{
+    width: 10%;
+}
 #updatePersonalInfo{
     width: 50%;
     line-height: 250%;
@@ -113,12 +112,12 @@ legend{
 .itemShowTable{
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 90%;
+    width: 95%;
     font-family: Gabriola;  
 }
 
 .itemShowTable td{
-    width: 16.5%;
+    width: 17%;
     height: 20%;
     text-align: center;
     font-size: 1.2vw;

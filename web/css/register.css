@@ -1,49 +1,50 @@
+.bodyRegister{
+    height: 100%;
+    border-top: dotted 1px grey;
+    padding-bottom: 15%;
+}
 .registerTable{
-    margin-left: 50px;
+    margin:auto;
     margin-top: 50px;
     text-align: right !important;
-    width: 550px;
-    height: 580px;
+    width: 35%;
+    height: 100%;
 }
 .registerTable div{
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-size: 1vw;
 }
-.registerTable input[type="text"]{
-    width: 150px;
-    height: 25px;
-    margin-left: 10px;
-}
-.registerTable input[type="email"]{
-    width: 150px;
-    height: 25px;
-    margin-left: 10px;
+.registerTable input{
+    width: 60%;
+    font-size: 1vw;
+    margin-left: 5%;
 }
 
-.registerTable input[type="password"] {
-    width: 150px;
-    height: 25px;
-    margin-left: 10px;
-}
 .radio{
-    width: 150px;
-    height: 25px;
-    margin-left: 10px;
+    width: 60%;
+    margin-left: 5%;
+    font-size: 1vw;
     display: inline-block;
+    overflow: hidden;
+}
+.radio input{
+    width: 10%;
 }
 #registerSubmit{
-    width: 140px;
-    line-height: 38px;
+    width: 50%;
+    line-height: 250%;
     text-align: center;
+    font-size: 1.2vw;
     font-weight: bold;
     color: #fff;
     float:right;
     text-shadow: 1px 1px 1px #333;
     border-radius: 5px;
-    margin: 0 50px 20px 0;
+    margin: 5% 10% 15% 0;
     border: 1px solid #f9edef;
     box-shadow: 0 1px 2px #f6c8d3 inset,0 -1px 0 #e9d2d8 inset,0 -2px 3px #fcecef inset;
-    background: -webkit-linear-gradient(top,#f7afc8,#f3b1cd);    
+    background: -webkit-linear-gradient(top,#f7afc8,#f3b1cd);     
 }
 
 

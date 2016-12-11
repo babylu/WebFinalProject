@@ -165,11 +165,11 @@ legend{
 }
 
 .itemShowTable input{
-    width: 20%;
-    height: 20px;
+    width: 30%;
+    font-size: 1vw;
 }
 .itemShowTable button{
-    margin-left: 10px;
-    width: 40px;
-    height: 20px;
+    margin-left: 5%;
+    width: 30%;
+    font-size: 0.8vw;
 }
