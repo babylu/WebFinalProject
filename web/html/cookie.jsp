@@ -30,7 +30,7 @@
                                 }
                         %></div>
                     </div>
-                    <input id="searchInput" type="text" placeholder=" search"style='font-size:13px;'>
+                    <input id="searchInput" type="text" placeholder=" search">
                     <img id="searchIcon" alt="searchIcon" src="../img/searchIcon20.jpeg">
                 </div>
                 <ul id="menu" class="menu">

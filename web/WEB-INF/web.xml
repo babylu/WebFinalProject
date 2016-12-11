@@ -26,7 +26,14 @@
         <servlet-name>buyProduct</servlet-name>
         <url-pattern>/html/buyProduct</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>customer.Register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/html/register</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

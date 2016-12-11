@@ -53,40 +53,82 @@ public class BuyProduct extends HttpServlet {
         }
         
         //check input number
-        Pattern r = Pattern.compile("/[0-9]+/");
+        Pattern r = Pattern.compile("[0-9]+");
         Matcher m = r.matcher(request.getParameter("number"));
         if (!m.matches()) {
             out.println("<script>alert('Input Error!');</script>");
-//            out.println("<script>window.location.reload();</script>");
+            out.println("<script>window.history.go(-1);</script>");
             return;
         }
         
         
-//        //generate all parameters
-//        
-//        String username = (String)session.getAttribute("username");
-//        // get parameters submitted from the form
-//        String productId = request.getParameter("product_id");
-//        double productPrice = Double.parseDouble(request.getParameter("product_price"));
-//        int productQuantity = Integer.parseInt(request.getParameter("number"));
-//        SimpleDateFormat df = new SimpleDateFormat("mmddyyyyhhmmss");
-//
-//        // Get the date today using Calendar object.
-//        Date today = Calendar.getInstance().getTime();        
-//        // Using DateFormat format method we can create a string 
-//        // representation of a date with the defined format.
-//        String orderNum = df.format(today);
-//        try{
-//            st = conn.createStatement();
-//            String insertSql = "INSERT INTO transaction (order_num, product_id, product_price, product_quantity, customer_id) VALUES ('"+orderNum+"','"+productId+"','"+productPrice+"','"+productQuantity+"','"+username+"')";
-//            st.executeUpdate(insertSql);
-//            out.println("<script>alert('Buy success!   Your order number is "+ orderNum +"');</script>");
-//            out.println("<script>window.location.href = 'http://localhost:8080/WebHw6/icecream.jsp';</script>");
-//        }
-//        catch (SQLException se)
-//        {
-//            se.printStackTrace();  
-//        }
+        //generate all parameters
+        String username = (String)session.getAttribute("username");
+        // get parameters submitted from the form
+        String productId = request.getParameter("product_id");
+        int productQuantity = Integer.parseInt(request.getParameter("number"));
+        double productPrice = Double.parseDouble(request.getParameter("product_price"))*((double)productQuantity);
+        SimpleDateFormat df = new SimpleDateFormat("mmddyyyyhhmmss");
+        // Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();        
+        // Using DateFormat format method we can create a string 
+        // representation of a date with the defined format.
+        String orderNum = df.format(today);
+        
+        Integer amount = 0;
+        //check product situation
+        try{
+            st = conn.createStatement();
+            String selectSQL = "SELECT amount FROM product WHERE product_id = " + productId + "";
+            rs = st.executeQuery(selectSQL);
+            if(rs.next()){
+                amount = Integer.parseInt(rs.getString("amount"));
+                if(productQuantity > amount){
+                    out.println("<script>alert('No Enough Product!');</script>");
+                    out.println("<script>window.history.go(-1);</script>");
+                    return;
+                }
+            }else{
+                out.println("<script>alert('Error!');</script>");
+                out.println("<script>window.history.go(-1);</script>");
+                return;
+            }
+        }catch (SQLException se)
+        {
+            se.printStackTrace();  
+        }
+        
+        String salespersonId = null;
+        //select a salesperson
+        try{
+            st = conn.createStatement();
+            String selectSQL = "SELECT salesperson_id FROM salesperson";
+            rs = st.executeQuery(selectSQL);
+            ArrayList<String> salespersonList = new ArrayList<String>();
+            while(rs.next()){
+                salespersonList.add(rs.getString("salesperson_id"));
+            }
+            Random rand = new Random();
+            int randomNum = rand.nextInt(salespersonList.size());
+            salespersonId = salespersonList.get(randomNum);
+        }catch (SQLException se)
+        {
+            se.printStackTrace();  
+        }
+        
+        
+        try{
+            st = conn.createStatement();
+            String insertSql = "INSERT INTO transaction (order_number, product_id, product_price, product_quantity, customer_id, salesperson_id) VALUES ('"+orderNum+"','"+productId+"','"+productPrice+"','"+productQuantity+"','"+username+"','"+salespersonId+"')";
+            st.executeUpdate(insertSql);
+            String updateSql = "UPDATE product set amount = " + (amount - productQuantity) + " where product_id=" + productId + ";";
+            st.executeUpdate(updateSql);
+            out.println("<script>alert('Buy success!   Your order number is "+ orderNum +"');</script>");
+            out.println("<script>location.href = document.referrer;</script>");
+        }catch (SQLException se)
+        {
+            se.printStackTrace();  
+        }
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

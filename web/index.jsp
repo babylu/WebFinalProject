@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
         <title>Delicious INC Home Page</title>
         <script type="text/javascript" src="./js/jquery-2.1.4.js"></script>
         <script type="text/javascript" src="./jquery-ui/jquery-ui.min.js"></script>
@@ -34,11 +35,11 @@
                             }
                         %></div>
                     </div>
-                    <input id="searchInput" type="text" placeholder="search" style='font-size:13px;'>
+                    <input id="searchInput" type="text" placeholder="search">
                     <img id="searchIcon" alt="searchIcon" src="./img/searchIcon20.jpeg">
                 </div>
                 <ul id="menu" class="menu">
-                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index.jsp">Home</a></li>
                     <li><a href="html/iceCream.jsp">Ice Creams</a></li>
                     <li><a href="html/cake.jsp">Cakes</a></li>
                     <li><a href="html/chocolate.jsp">Chocolates</a></li>
@@ -47,7 +48,7 @@
             </div>
             <div class="body">
                 <div class="theme-default"> 
-                    <div id="slider" class="nivoSlider" style="width:950px;margin:5px 5px 5px 5px;">
+                    <div id="slider" class="nivoSlider" style="width:98%;margin:1% 1% 1% 1%;">
                         <img src="img/cake.jpeg" alt="Img"/>
                         <img src="img/cake1.jpg" alt="Img"/>
                         <img src="img/cake2.jpg" alt="Img"/>                                

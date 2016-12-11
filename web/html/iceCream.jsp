@@ -16,7 +16,6 @@
         <script type="text/javascript" src="../js/main.js"></script>
         <script type="text/javascript" src="../js/searchItem.js"></script>
         <link rel="stylesheet" href="../css/common.css" type="text/css">
-        <link rel="stylesheet" href="../css/pageIndex.css" type="text/css">
     </head>
     <body>
         <div class="mainPart">
@@ -32,7 +31,7 @@
                             }
                         %></div>
                     </div>
-                    <input id="searchInput" type="text" placeholder="search" style='font-size:13px;'>
+                    <input id="searchInput" type="text" placeholder="search">
                     <img id="searchIcon" alt="searchIcon" src="../img/searchIcon20.jpeg">
                 </div>
                 <ul id="menu" class="menu">

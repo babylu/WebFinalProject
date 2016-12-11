@@ -6,7 +6,8 @@
 $(function(){
     $('#searchIcon').click(function(){
         var searchInfo = $('#searchInput').val();
-        window.location.href='http://localhost:8080/WebFinalProject/html/searchResult.jsp'+'?'+searchInfo;
+        var location = 'http://localhost:8080/WebFinalProject/html/searchResult.jsp'+'?searchInfo='+searchInfo;
+        window.location.href=location;
     });
 });
 

@@ -1,9 +1,13 @@
 .category{
     margin-left: auto;
     margin-right: auto;
-    padding-left: 4px;
+    width:98%;
+    margin-bottom: 1%;
+    overflow: auto;
 }
 
 .category img{
-    width:235px;
+    width:25%;
+    float:left;
+    overflow: auto;
 }
