@@ -59,15 +59,6 @@
         <url-pattern>/html/modifyProduct</url-pattern>
     </servlet-mapping>
     
-<!--    <servlet>
-        <servlet-name>deleteProduct</servlet-name>
-        <servlet-class>admin.DeleteProduct</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deleteProduct</servlet-name>
-        <url-pattern>/html/deleteProduct</url-pattern>
-    </servlet-mapping>-->
-    
     <session-config>
         <session-timeout>
             30
