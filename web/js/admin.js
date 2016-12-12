@@ -1,24 +1,21 @@
 
 $(function(){
-    $('#viewOption').show();
-    $('#addOption').hide();
+    $('#addOption').show();
     $('#modifyOption').hide();
-    $('#view').click(function(){
-        $('#viewOption').show();
-        $('#addOption').hide();
-        $('#modifyOption').hide();
-    });
     $('#add').click(function(){
         $('#addOption').show();
         $('#modifyOption').hide();
-        $('#viewOption').hide();
     });
     $('#modify').click(function(){
         $('#modifyOption').show();
         $('#addOption').hide();
-        $('#viewOption').hide();
     });
-    
+    $("#logout").click(function(){
+        $.post("logout",function(){
+            alert('log out success!');
+            window.location.href = 'http://localhost:8080/WebFinalProject/html/login.jsp';
+        });
+    });
 });
 
 

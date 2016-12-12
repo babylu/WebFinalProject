@@ -39,6 +39,7 @@ public class Login extends HttpServlet {
         if(conn == null){
             output = "Connect Database Error";
             failLogin(request, response);
+            return;
         }
         
         String username = request.getParameter("username");
@@ -48,13 +49,17 @@ public class Login extends HttpServlet {
         try{
             //user login
             st = conn.createStatement();
-            String sql;
+            String sql = "";
             if(type.equals("customer")){
                 //customer login
                 sql = "SELECT * FROM customer WHERE customer_id = '" + username +"'";
-            }else{
+            }else if(type.equals("admin")){
                 //admin login
                 sql = "SELECT * FROM admin WHERE username = '" + username +"'";
+            }else{
+                output = "User Type Error";
+                failLogin(request, response);
+                return;
             }
             
             rs = st.executeQuery(sql);
@@ -71,10 +76,12 @@ public class Login extends HttpServlet {
                 else {
                     output = "Wrong password!";
                     failLogin(request, response);
+                    return;
                 }
             }else {
                 output = "Wrong email!";
                 failLogin(request, response);
+                return;
             }
             rs.close();
             st.close();

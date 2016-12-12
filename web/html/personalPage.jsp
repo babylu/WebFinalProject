@@ -60,7 +60,7 @@
                         <legend>Basic Info</legend>
                         <center>
                         <jsp:useBean id="getUserInfo" class="customer.GetUserInfo" scope="page" />
-                        <jsp:useBean id="userInfo" class="customer.UserInfo" scope="page" />
+                        <jsp:useBean id="userInfo" class="entity.UserInfo" scope="page" />
                         <%
                             if(session.getAttribute("username") == null){
                                 userInfo = getUserInfo.getBasicInfo("");

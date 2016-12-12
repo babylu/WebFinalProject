@@ -2,7 +2,7 @@ $(function(){
     var username = $('#username').html();
     if(username !== 'Login/Register'){
         var now = $('#link').html();
-        now = now+'<div id="logout">logout</div>';
+        now = now+'<div id="logout">Logout</div>';
         $('#link').html(now);
             
     }

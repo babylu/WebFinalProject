@@ -60,7 +60,7 @@
                     <label>Gender: </label>
                     <div class="radio" style="margin-top: 0;margin-bottom: 0;">
                         <input type="radio" name="gender" value="female" checked="checked">Female
-                        <input type="radio" name="gender" value="fale">Male
+                        <input type="radio" name="gender" value="male">Male
                     </div>
                 </div>
                 <div>

@@ -1,5 +1,9 @@
-
-package customer;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package admin;
 
 import common.DBConnecter;
 import java.io.IOException;
@@ -8,27 +12,27 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
  * @author babylu
  */
-public class BuyProduct extends HttpServlet {
+public class ModifyProduct extends HttpServlet {
     private Statement st;
     private ResultSet rs = null;
-    private Connection conn = null;
-    private String output;
-    private String page;
+    DBConnecter dbConnecter = new DBConnecter();
+    private Connection conn = dbConnecter.connetDatabase();
+
     /**
      * Processes requests for both HTTP GET and POST methods.
      *
@@ -42,54 +46,39 @@ public class BuyProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-        DBConnecter dbConnecter = new DBConnecter();
-        Connection conn = dbConnecter.connetDatabase();
         
-        //no session name -> to login
-        if (session.getAttribute("username") == null) {
-            out.println("<script>alert('Please login first!')</script>");
+        if(session.getAttribute("type")==null){
+            out.println("<script>alert('Please login admin account first!')</script>");
+            out.println("<script>window.location.href = 'http://localhost:8080/WebFinalProject/html/login.jsp';</script>");
+            return;
+        }
+
+        if(!session.getAttribute("type").toString().equals("admin") ){
+            out.println("<script>alert('Please login admin account first!')</script>");
             out.println("<script>window.location.href = 'http://localhost:8080/WebFinalProject/html/login.jsp';</script>");
             return;
         }
         
-        //check input number
-        Pattern r = Pattern.compile("[0-9]+");
-        Matcher m = r.matcher(request.getParameter("number"));
-        if (!m.matches()) {
-            out.println("<script>alert('Input Error!');</script>");
+        String productId = request.getParameter("productId");
+        String kind = request.getParameter("kind");
+        String name = request.getParameter("name");
+        String price = request.getParameter("price");
+        String amount = request.getParameter("amount");
+        
+        //check not null
+        if(productId.equals("") || kind.equals("") || name.equals("") || price.equals("") || amount.equals("")){
+            out.println("<script>alert('Input Error!')</script>");
             out.println("<script>window.history.go(-1);</script>");
             return;
         }
         
-        
-        //generate all parameters
-        String username = (String)session.getAttribute("username");
-        // get parameters submitted from the form
-        String productId = request.getParameter("product_id");
-        int productQuantity = Integer.parseInt(request.getParameter("number"));
-        double productPrice = Double.parseDouble(request.getParameter("product_price"))*((double)productQuantity);
-        SimpleDateFormat df = new SimpleDateFormat("mmddyyyyhhmmss");
-        // Get the date today using Calendar object.
-        Date today = Calendar.getInstance().getTime();        
-        // Using DateFormat format method we can create a string 
-        // representation of a date with the defined format.
-        String orderNum = df.format(today);
-        
-        Integer amount = 0;
-        //check product situation
+        //check id
         try{
+            String selectSQL = "SELECT * FROM product WHERE product_id='"+productId+"';";
             st = conn.createStatement();
-            String selectSQL = "SELECT amount FROM product WHERE product_id = " + productId + "";
             rs = st.executeQuery(selectSQL);
-            if(rs.next()){
-                amount = Integer.parseInt(rs.getString("amount"));
-                if(productQuantity > amount){
-                    out.println("<script>alert('No Enough Product!');</script>");
-                    out.println("<script>window.history.go(-1);</script>");
-                    return;
-                }
-            }else{
-                out.println("<script>alert('Error!');</script>");
+            if(!rs.next()){
+                out.println("<script>alert('Product ID Error!')</script>");
                 out.println("<script>window.history.go(-1);</script>");
                 return;
             }
@@ -98,18 +87,43 @@ public class BuyProduct extends HttpServlet {
             se.printStackTrace();  
         }
         
+        //check kind
+        if((!kind.equals("cake")) && (!kind.equals("icecream")) && (!kind.equals("chocolate")) && (!kind.equals("cookie"))){
+            out.println("<script>alert('Catedory Error!')</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
+        }
+        
+       
+        //check price
+        Pattern r = Pattern.compile("([0-9]+.[0-9]+)|([0-9]+)");
+        Matcher m = r.matcher(price);
+        if (!m.matches()) {
+            out.println("<script>alert('Input Price Error!');</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
+        }
+        
+        //check amount
+        r = Pattern.compile("[0-9]+");
+        m = r.matcher(amount);
+        if (!m.matches()) {
+            out.println("<script>alert('Input Amount Error!');</script>");
+            out.println("<script>window.history.go(-1);</script>");
+            return;
+        }
+        
         try{
             st = conn.createStatement();
-            String insertSql = "INSERT INTO transaction (order_number, product_id, product_price, product_quantity, customer_id) VALUES ('"+orderNum+"','"+productId+"','"+productPrice+"','"+productQuantity+"','"+username+"')";
-            st.executeUpdate(insertSql);
-            String updateSql = "UPDATE product SET amount = " + (amount - productQuantity) + " where product_id=" + productId + ";";
+            String updateSql = "UPDATE product SET name='"+name+"',amount="+amount+",price="+price+",kind='"+kind+"' WHERE product_id='" + productId + "';";
             st.executeUpdate(updateSql);
-            out.println("<script>alert('Buy success!   Your order number is "+ orderNum +"');</script>");
+            out.println("<script>alert('Modify Product Success');</script>");
             out.println("<script>location.href = document.referrer;</script>");
         }catch (SQLException se)
         {
             se.printStackTrace();  
         }
+        
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -150,5 +164,4 @@ public class BuyProduct extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-      
 }

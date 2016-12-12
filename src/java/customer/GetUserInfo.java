@@ -1,5 +1,6 @@
 package customer;
 
+import entity.UserInfo;
 import common.DBConnecter;
 import java.sql.Connection;
 import java.sql.ResultSet;
