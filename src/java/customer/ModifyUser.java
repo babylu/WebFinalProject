@@ -102,6 +102,8 @@ public class ModifyUser extends HttpServlet {
             st.executeUpdate(updateSql);
             out.println("<script>alert('Modeify Success!');</script>");
             out.println("<script>window.location.href = 'http://localhost:8080/WebFinalProject/html/personalPage.jsp';</script>\")");
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  

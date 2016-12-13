@@ -82,6 +82,8 @@ public class ModifyProduct extends HttpServlet {
                 out.println("<script>window.history.go(-1);</script>");
                 return;
             }
+            rs.close();
+            st.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  
@@ -119,6 +121,9 @@ public class ModifyProduct extends HttpServlet {
             st.executeUpdate(updateSql);
             out.println("<script>alert('Modify Product Success');</script>");
             out.println("<script>location.href = document.referrer;</script>");
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  

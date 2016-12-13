@@ -110,6 +110,9 @@ public class AddInventory  extends HttpServlet {
             st.executeUpdate(insertSql);
             out.println("<script>alert('Add Product Success');</script>");
             out.println("<script>location.href = document.referrer;</script>");
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  

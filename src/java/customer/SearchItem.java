@@ -31,6 +31,9 @@ public class SearchItem {
                     output = output + "<button type='submit'>Buy</button>";
                     output = output + "</form></td></tr>";
             }
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  
@@ -64,6 +67,9 @@ public class SearchItem {
                         idList.add(rs.getString("product_id"));
                     }
                 }
+                rs.close();
+                st.close();
+                conn.close();
             }
         }catch (SQLException se)
         {

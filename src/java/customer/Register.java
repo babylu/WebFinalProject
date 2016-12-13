@@ -48,7 +48,7 @@ public class Register extends HttpServlet {
         
         //check username
         String username = request.getParameter("username");
-        if(username == ""){
+        if(username.equals("")){
             out.println("<script>alert('Please Input Username!');</script>");
             out.println("<script>window.history.go(-1);</script>");
             return;
@@ -69,7 +69,7 @@ public class Register extends HttpServlet {
         
         //check password
         String password = request.getParameter("password");
-        if(password == ""){
+        if(password.equals("")){
             out.println("<script>alert('Please Input Password!');</script>");
             out.println("<script>window.history.go(-1);</script>");
             return;
@@ -143,10 +143,14 @@ public class Register extends HttpServlet {
             out.println("<script>alert('Register Success!');</script>");
             Login login = new Login();
             login.successLogin(request, response, name,username, "customer");
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  
         }
+        
     }
     
     

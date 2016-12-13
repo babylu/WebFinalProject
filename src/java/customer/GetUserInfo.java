@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServlet;
  * @author babylu
  */
 public class GetUserInfo extends HttpServlet {
-    private DBConnecter dbConnecter = new DBConnecter();
-    private Connection conn = dbConnecter.connetDatabase();
-    private ResultSet rs;
     
     public UserInfo getBasicInfo(String username){
+        DBConnecter dbConnecter = new DBConnecter();
+        Connection conn = dbConnecter.connetDatabase();
+        ResultSet rs;
         UserInfo userInfo = new UserInfo();
-        if(username == ""){
+        if(username.equals("")){
             return userInfo;
         }
         try{
@@ -38,6 +38,9 @@ public class GetUserInfo extends HttpServlet {
                 userInfo.setAge(rs.getInt("age"));
                 userInfo.setIncome(rs.getInt("income"));
             }
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  
@@ -46,6 +49,9 @@ public class GetUserInfo extends HttpServlet {
         return userInfo;
     }
     public String getPurchaseHistory(String username){
+        DBConnecter dbConnecter = new DBConnecter();
+        Connection conn = dbConnecter.connetDatabase();
+        ResultSet rs;
         String output="";
         try{
             Statement st = conn.createStatement();
@@ -68,6 +74,9 @@ public class GetUserInfo extends HttpServlet {
                     output = output + "<td>" + rs.getBigDecimal("product_price") + "</td>";
                     output = output + "</tr>";
             }
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  

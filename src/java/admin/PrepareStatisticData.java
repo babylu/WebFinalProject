@@ -46,6 +46,9 @@ public class PrepareStatisticData {
                     statisticData.setIcecream(rs.getInt("sum"));
                 }
             }
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  

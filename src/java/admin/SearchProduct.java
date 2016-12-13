@@ -54,6 +54,9 @@ public class SearchProduct {
 //                        + "</form></td>";
                 output = output + "</tr>";
             }
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  

@@ -93,6 +93,8 @@ public class BuyProduct extends HttpServlet {
                 out.println("<script>window.history.go(-1);</script>");
                 return;
             }
+            rs.close();
+            st.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  
@@ -106,6 +108,9 @@ public class BuyProduct extends HttpServlet {
             st.executeUpdate(updateSql);
             out.println("<script>alert('Buy success!   Your order number is "+ orderNum +"');</script>");
             out.println("<script>location.href = document.referrer;</script>");
+            rs.close();
+            st.close();
+            conn.close();
         }catch (SQLException se)
         {
             se.printStackTrace();  
